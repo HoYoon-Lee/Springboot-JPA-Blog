@@ -27,7 +27,6 @@ public class Board {
     @Lob
     private String content; // Summer Note content
 
-    @ColumnDefault("0")
     private int count;
 
     @ManyToOne
