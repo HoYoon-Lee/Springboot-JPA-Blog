@@ -32,11 +32,18 @@ public class UserService {
         User persistence = userRepository.findById(user.getId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
-        String rawPassword = user.getPassword();
-        String encPassword = encoder.encode(rawPassword);
-        persistence.setPassword(encPassword);
+        if(persistence.getOauth() == null || persistence.getOauth().isEmpty()) {
+            String rawPassword = user.getPassword();
+            String encPassword = encoder.encode(rawPassword);
+            persistence.setPassword(encPassword);
+        }
         persistence.setEmail(user.getEmail());
 
         return persistence.getUserName();
+    }
+
+    @Transactional(readOnly = true)
+    public boolean existsByUserName(String userName) {
+        return userRepository.existsByUserName(userName);
     }
 }

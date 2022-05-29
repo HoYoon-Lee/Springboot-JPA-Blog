@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ include file="../layout/header.jsp"%>
+
 <html>
 <head>
     <title>Login</title>
@@ -22,6 +23,7 @@
             <input type="password" name="password" class="form-control" placeholder="Enter password" id="password">
         </div>
         <button id="btn-login" class="btn btn-primary">로그인</button>
+        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=2895dbd09e0eb960b8ce21d01ce9b66b&redirect_uri=http://localhost:8000/auth/kakao/callback"><img height="38px" src="/image/kakao_login_button.png"></a>
     </form>
 </div>
 
