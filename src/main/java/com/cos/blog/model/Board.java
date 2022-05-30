@@ -1,5 +1,6 @@
 package com.cos.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +34,8 @@ public class Board {
     @JoinColumn(name = "userId")
     private User user;
 
+    @JsonIgnoreProperties({"board"})
+    @OrderBy("id desc")
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     private List<Reply> replies;
 

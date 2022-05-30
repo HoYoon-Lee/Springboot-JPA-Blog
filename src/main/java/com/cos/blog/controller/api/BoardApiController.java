@@ -3,6 +3,7 @@ package com.cos.blog.controller.api;
 import com.cos.blog.config.auth.PrincipalDetail;
 import com.cos.blog.dto.Message;
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
 import com.cos.blog.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,15 @@ public class BoardApiController {
     public ResponseEntity<Message> deleteById(@PathVariable int id){
         boardService.deleteById(id);
         return new Message<>(HttpStatus.NO_CONTENT, 1)
+                .asResponseEntity();
+    }
+
+    @PostMapping("{boardId}/reply")
+    public ResponseEntity<Message> saveReply(@PathVariable int boardId,
+                                             @RequestBody Reply reply,
+                                             @AuthenticationPrincipal PrincipalDetail principal){
+        boardService.saveReply(principal.getUser(), boardId, reply);
+        return new Message<>(HttpStatus.OK, 1)
                 .asResponseEntity();
     }
 }
