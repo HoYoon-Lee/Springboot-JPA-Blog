@@ -46,4 +46,11 @@ public class BoardApiController {
         return new Message<>(HttpStatus.OK, 1)
                 .asResponseEntity();
     }
+
+    @DeleteMapping("{boardId}/reply/{replyId}")
+    public ResponseEntity<Message> deleteReply(@PathVariable int replyId){
+        boardService.deleteReply(replyId);
+        return new Message<>(HttpStatus.OK, 1)
+                .asResponseEntity();
+    }
 }
